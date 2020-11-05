@@ -1,7 +1,49 @@
-﻿
-@{
-    ViewData["Title"] = "Create";
+﻿@{
+    ViewData["Title"]="Create";
+    System.Diagnostics.Debug.WriteLine("VIEW - Rendering CREATE View\n-------------------------");
 }
 
-<h1>Create</h1>
+<h1>Add Book to your Basket</h1>
 
+<section>
+    @{
+        if ( ViewBag.Sucess!=null )
+        {
+            <p class="btn btn-success">Congratuations,@(ViewBag.Sucess)</p>
+        }
+
+        else if ( ViewBag.Error!=null )
+        {
+            <p class="btn btn-danger">Oops,@(ViewBag.Error)</p>
+        }
+    }
+
+</section>
+
+<section>
+    <form action="/Book/Create" method="get">
+
+        <div>
+            <label for="title">Title</label>
+            <input type="text" id="title" name="title" value="" />
+        </div>
+        <div>
+            <label for="author_id">Author</label>
+            <select id="authorID" name="authorID">
+
+                @foreach ( Author author in ViewBag.Authors )
+                {
+                    <option value="@(author.ID)">@(author.Name)</option>
+                }
+
+            </select>
+        </div>
+        <div>
+            <label for="publicationDate">Publication Date</label>
+            <input type="date" id="publicationDate" name="publicationDate" value="" />
+        </div>
+
+        <button type="submit">Add Book</button>
+    </form>
+
+</section>

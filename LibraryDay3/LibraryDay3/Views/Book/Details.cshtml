@@ -1,7 +1,36 @@
-﻿
-@{
-    ViewData["Title"] = "Details";
+﻿@{
+    ViewData["Title"]="Details";
 }
 
-<h1>Details</h1>
+<h1>Book Details</h1>
+<!--If an “id” query string parameter was supplied, use “GetBookByID()” and render: "You checked out {Title} on {CheckedOutDate}, and the due date is {DueDate}."-->
+@{
+    if ( ViewBag.Error!=null )
+    {
 
+        <p class="alert-danger">No book was selected.</p>
+    }
+    else
+    {
+
+        <p>@($"You checked out {ViewBag.Book.Title} on {ViewBag.Book.CheckedOutDate.ToShortDateString()}, and the due date is{ViewBag.Book.DueDate.ToShortDateString()}.")</p>
+
+        <section>
+            <h2>Books Details</h2>
+
+            <p>Title: @(ViewBag.Book.Title)</p>
+            <p>Author: @(ViewBag.Book.Author)</p>
+            <p>Publication Date: @(ViewBag.Book.PublicationDate.ToShortDateString())</p>
+            <p>Checked Out Date: @(ViewBag.Book.CheckedOutDate.ToShortDateString())</p>
+            <p>Due Date: @(ViewBag.Book.DueDate.ToShortDateString())</p>
+            <p>Returned Status/ Date: @(ViewBag.Book.ReturnedDate == null?"Not Returned":((DateTime)ViewBag.Book.ReturnedDate).ToShortDateString())</p>
+        </section>
+
+        <!--https://localhost:44375/Book/Details?id=1&extend=true-->
+        <a class="btn btn-primary" href="/Book/Details?id=@(ViewBag.Book.ID)&extend=true">Extend DueDate for @(ViewBag.Book.Title)</a>
+        <a class="btn btn-success" href="/Book/Details?id=@(ViewBag.Book.ID)&returned=true">Return Book @(ViewBag.Book.Title)</a>
+        <a class="btn btn-danger" href="/Book/Details?id=@(ViewBag.Book.ID)&delete=true">Delete @(ViewBag.Book.Title)</a>
+        <a class="btn btn-secondary" href="/Book/Details?id=@(ViewBag.Book.ID)&borrow=true">Borrow @(ViewBag.Book.Title)</a>
+
+    }
+}
