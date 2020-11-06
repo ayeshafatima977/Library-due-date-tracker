@@ -10,10 +10,10 @@ namespace LibraryDay3.Models.Exceptions
         // A list of exceptions shown as one Exception
         public List<Exception> newExceptions { get; set; } = new List<Exception>();
 
-        // Override our message with a summary.
+        // Override our current message To get a List of Error Messages togather.
         public override string Message => $"There are {newExceptions.Count} exceptions.";
 
-        // When we construct this exception without a messsage, we get an empty sub-list which we can populate.
+        //Default Exception just for case of override
         public ValidationException() : base()
         { }
 

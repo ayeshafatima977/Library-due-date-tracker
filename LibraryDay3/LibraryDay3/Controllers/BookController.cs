@@ -44,7 +44,7 @@ namespace LibraryDay3.Controllers
                 try
                 {
                     Book createBook = CreateBook(title,int.Parse(authorID),publicationDate);
-                    ViewBag.Sucess=($"You have successfully checked out {createBook.Title} until {createBook.DueDate}.");
+                    ViewBag.Sucess=($"You have successfully checked out {createBook.Title}.");
 
                 }
                 // Catch ONLY ValidationException. Any other Exceptions (FormatException, DivideByZeroException, etc) will not get caught, and will break the whole program.
@@ -92,6 +92,7 @@ namespace LibraryDay3.Controllers
             }
             else
             {
+
                 if ( extend!=null )
                 {
                     try
@@ -115,7 +116,21 @@ namespace LibraryDay3.Controllers
                     }
                 }
 
+
+                Book getBook = GetBookByID(int.Parse(id));
+
+                if ( getBook==null )
+                {
+                    ViewBag.Error="No book selected.";
+                }
+                else
+                {
+                    ViewBag.Book=getBook;
+                }
+               
+
             }
+            return View();
 
         }
         // These methods are for data management.Ensure that “CreateBook()” is no longer accepting an ID, as it is database generated

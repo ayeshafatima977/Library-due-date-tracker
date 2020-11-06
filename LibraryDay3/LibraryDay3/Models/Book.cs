@@ -34,6 +34,12 @@ namespace LibraryDay3.Models
         [Required]
         public DateTime PublicationDate { get; set; }
 
+        public DateTime DueDate { get; set; }
+
+
+        public DateTime? ReturnedDate { get; set; }
+
+
         // Points to the property representing the foreign key column.
         [ForeignKey(nameof(AuthorID))]
 
