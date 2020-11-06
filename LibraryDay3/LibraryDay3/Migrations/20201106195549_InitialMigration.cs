@@ -82,7 +82,7 @@ namespace LibraryDay3.Migrations
                     { -2, new DateTime(1676, 10, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "William ShakeSpeare" },
                     { -3, new DateTime(1865, 5, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Alice Walker" },
                     { -4, new DateTime(1735, 11, 30, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1910, 4, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), "Rachel Kushner" },
-                    { -5, new DateTime(1965, 5, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "J.K. Rowling" }
+                    { -5, new DateTime(1775, 5, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Jane Austen" }
                 });
 
             migrationBuilder.InsertData(
@@ -91,10 +91,10 @@ namespace LibraryDay3.Migrations
                 values: new object[,]
                 {
                     { -1, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1994, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Measure for Measure" },
-                    { -3, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1980, 3, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Hamlet" },
-                    { -2, -5, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1800, 2, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Harry Potter and the Order of the Phoenix" },
-                    { -4, -5, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2002, 7, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Harry Potter And The Philosopher's Stone" },
-                    { -5, -5, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2012, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "The Casual Vacancy" }
+                    { -2, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1800, 2, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Harry Potter and the Order of the Phoenix" },
+                    { -4, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2002, 7, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Harry Potter And The Philosopher's Stone" },
+                    { -3, -2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1980, 3, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Hamlet" },
+                    { -5, -3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2012, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "The Casual Vacancy" }
                 });
 
             migrationBuilder.InsertData(
@@ -102,10 +102,10 @@ namespace LibraryDay3.Migrations
                 columns: new[] { "id", "book_id", "checked_out_date", "due_date", "ExtensionCount", "returned_date" },
                 values: new object[,]
                 {
+                    { -3, -1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 1, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, null },
                     { -5, -1, new DateTime(2020, 11, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 12, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, new DateTime(2020, 11, 22, 0, 0, 0, 0, DateTimeKind.Unspecified) },
                     { -1, -2, new DateTime(2019, 12, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 1, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, new DateTime(2020, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified) },
                     { -2, -4, new DateTime(2019, 12, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, new DateTime(2020, 1, 12, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { -3, -5, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 1, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, null },
                     { -4, -5, new DateTime(2020, 11, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 12, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, new DateTime(2020, 11, 22, 0, 0, 0, 0, DateTimeKind.Unspecified) }
                 });
 

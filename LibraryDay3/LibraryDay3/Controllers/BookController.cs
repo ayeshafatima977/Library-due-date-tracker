@@ -9,16 +9,6 @@ using Microsoft.EntityFrameworkCore;
 using LibraryDay3.Models.Exceptions;
 using System.Linq.Expressions;
 
-/*“BookController” (Controller) class modified:
-Modify “ExtendDueDateForBookByID()” to call “BorrowController.ExtendDueDateForBorrowByID()”.
-Modify “ReturnBookByID()” to call “BorrowController.ReturnBorrowByID()”.
-Modify “DeleteBookByID()” to delete a book.
-Add a “GetBooks()” method to get a list of all books.
-Add a “GetOverdueBooks()” method to get a list of all books that have a due date prior to the current date.
-Modify “GetBookByID()” to get a specific book from the database.
-Ensure that the necessary virtual properties are populated on all ‘Get’ methods before returning results.
-Ensure that “CreateBook()” is no longer accepting an ID, as it is database generated.
-*/
 namespace LibraryDay3.Controllers
 {
     public class BookController :Controller
@@ -84,7 +74,7 @@ namespace LibraryDay3.Controllers
         }
 
 
-        public IActionResult Details(string id,string extend,string returned,string delete)
+        public IActionResult Details(string id,string extend,string returned,string delete,string borrow)
         {
             //  Validation for ID If validation fails
 
@@ -123,6 +113,12 @@ namespace LibraryDay3.Controllers
                     {
                         ViewBag.Exceptions=e;
                     }
+                }
+
+                if ( borrow!=null )
+                {
+                    BorrowController.CreateBorrow(int.Parse(id));
+                  
                 }
 
 
@@ -217,11 +213,14 @@ namespace LibraryDay3.Controllers
         //  Modify “GetBookByID()” to get a specific book from the database.
         public Book GetBookByID(int id)
         {
+           
             Book getBook;
             using ( LibraryContext context = new LibraryContext() )
             {
+                getBook=context.Books.Where(x => x.ID==(id)).Include(x => x.Author).Include(x => x.Borrows).SingleOrDefault();
+                /*
                 getBook=context.Books.Where(x => x.ID==id).Single();
-                getBook.Author=context.Authors.Where(x => x.ID==getBook.AuthorID).SingleOrDefault();
+                getBook.Author=context.Authors.Where(x => x.ID==getBook.AuthorID).SingleOrDefault();*/
             }
             return getBook;
         }
@@ -259,11 +258,13 @@ namespace LibraryDay3.Controllers
             List<Book> books;
             using ( LibraryContext context = new LibraryContext() )
             {
-                books=context.Books.ToList();
-                foreach ( Book book in books )
-                {
-                    book.Author=context.Authors.Where(x => x.ID==book.AuthorID).Single();
-                }
+                books=context.Books.Include(x => x.Author).Include(x => x.Borrows).ToList();
+
+
+                /* foreach ( Book book in books )
+                 {
+                     book.Author=context.Authors.Where(x => x.ID==book.AuthorID).Single();
+                 }*/
             }
             return books;
         }
@@ -278,7 +279,8 @@ namespace LibraryDay3.Controllers
             //@Link: https://www.w3resource.com/csharp-exercises/datetime/csharp-datetime-exercise-17.php
 
             {
-                overdueList=context.Books.Where(x => DateTime.Compare(DateTime.Today,x.DueDate)>0&&x.ReturnedDate==null).ToList();
+                overdueList=context.Books.Include(x => x.Borrows.Last().DueDate<DateTime.Now).ToList();
+                //Where(x => DateTime.Compare(DateTime.Today,x.DueDate)>0&&x.ReturnedDate==null).ToList();
 
                 foreach ( Book book in overdueList )
                 {

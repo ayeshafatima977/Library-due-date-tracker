@@ -7,7 +7,7 @@
     When the page loads with the checkbox checked (query string parameter), call the “GetOverdueBooks()” method instead of the “GetBooks()” method
 *@
 <form action="/Book/List" method="get">
-    <label for="filter">Filter OverdueBooks</label>
+    <label for="filter">Filter Overdue Books</label>
     <input type="checkbox" name="filter" @if ( ViewBag.Filter=="on" ) { @("checked") } />
     <button type="submit">Filter</button>
 </form>
@@ -33,13 +33,18 @@
                 <td>@(book.Title)</td>
                 <td>@(book.Author.Name)</td>
                 <td>@(book.PublicationDate.ToShortDateString())</td>
-
-
-                <td>@(book.GetCheckOutDate)</td>
-                <td>@(book.GetDueDate)</td>
-                <td>@(book.GetReturnDate ==null ? "Not Returned" : book.GetReturnDate)</td>
-
             </tr>
-        }
+
+                @if ( book.Borrows.Count>0 )
+                {
+                    //Most latest date
+                <td>@(book.Borrows.OrderByDescending(x => x.CheckedOutDate).FirstOrDefault().DueDate.ToShortDateString())</td>
+                <td>@book.Borrows.OrderByDescending(x => x.CheckedOutDate).FirstOrDefault().CheckedOutDate.ToShortDateString())</td>
+                <td>@(book.Borrows.OrderByDescending(x => x.CheckedOutDate).FirstOrDefault().ReturnedDate==null ? "Not Returned" : ((DateTime) book.Borrows.OrderByDescending(x => x.CheckedOutDate).FirstOrDefault().ReturnedDate).ToShortDateString()))</td>
+
+
+                    }
+                }
+                
     </tbody>
 </table>

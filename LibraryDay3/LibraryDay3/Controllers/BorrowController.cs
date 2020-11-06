@@ -47,25 +47,25 @@ namespace LibraryDay3.Controllers
 
         /*Add a “CreateBorrow()” method that will accept a “Book.ID” as a parameter and create a borrow for it. The “CheckOutDate” will be today.The “DueDate” will be 14 days from today. The “ReturnedDate” will be null.     */
 
-        public Borrow CreateBorrow(int id)
+        public static void CreateBorrow(int id)
         {
 
-            Borrow newBorrow = new Borrow()
-            {
-                CheckedOutDate=DateTime.Today,
-                DueDate=DateTime.Today.AddDays(14),
-                ReturnedDate=null,
-                ExtensionCount=0
-
-            };
             using ( LibraryContext context = new LibraryContext() )
             {
+                context.Borrows.Add(new Borrow()
+                {
+                    BookID = id,
+                    CheckedOutDate=DateTime.Today,
+                    DueDate=DateTime.Today.AddDays(14),
+                    ReturnedDate=null,
+                    ExtensionCount=0
 
-                context.Borrows.Add(newBorrow);
+                });
+
+                
                 context.SaveChanges();
             }
-            return newBorrow;
-
+            
         }
 
 

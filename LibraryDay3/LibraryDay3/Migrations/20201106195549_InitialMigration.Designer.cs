@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LibraryDay3.Migrations
 {
     [DbContext(typeof(LibraryContext))]
-    [Migration("20201106013341_InitialMigration")]
+    [Migration("20201106195549_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -76,9 +76,9 @@ namespace LibraryDay3.Migrations
                         new
                         {
                             ID = -5,
-                            BirthDate = new DateTime(1965, 5, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            BirthDate = new DateTime(1775, 5, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DeathDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "J.K. Rowling"
+                            Name = "Jane Austen"
                         });
                 });
 
@@ -128,7 +128,7 @@ namespace LibraryDay3.Migrations
                         new
                         {
                             ID = -2,
-                            AuthorID = -5,
+                            AuthorID = -1,
                             DueDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PublicationDate = new DateTime(1800, 2, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Title = "Harry Potter and the Order of the Phoenix"
@@ -136,7 +136,7 @@ namespace LibraryDay3.Migrations
                         new
                         {
                             ID = -3,
-                            AuthorID = -1,
+                            AuthorID = -2,
                             DueDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PublicationDate = new DateTime(1980, 3, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Title = "Hamlet"
@@ -144,7 +144,7 @@ namespace LibraryDay3.Migrations
                         new
                         {
                             ID = -4,
-                            AuthorID = -5,
+                            AuthorID = -1,
                             DueDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PublicationDate = new DateTime(2002, 7, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Title = "Harry Potter And The Philosopher's Stone"
@@ -152,7 +152,7 @@ namespace LibraryDay3.Migrations
                         new
                         {
                             ID = -5,
-                            AuthorID = -5,
+                            AuthorID = -3,
                             DueDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PublicationDate = new DateTime(2012, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Title = "The Casual Vacancy"
@@ -215,7 +215,7 @@ namespace LibraryDay3.Migrations
                         new
                         {
                             ID = -3,
-                            BookID = -5,
+                            BookID = -1,
                             CheckedOutDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DueDate = new DateTime(2020, 1, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ExtensionCount = 0
