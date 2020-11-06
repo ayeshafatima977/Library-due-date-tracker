@@ -67,10 +67,19 @@ namespace LibraryDay3.Controllers
 
         //Modify the output to account for the new models (show the property values from the related table
 
-        public IActionResult List()
+        public IActionResult List(string filter)
         {
-            // Debug.WriteLine("ACTION - List Action");
-            ViewBag.Books=GetBooks();
+            /*  When the page loads with the checkbox checked (query string parameter), call the “GetOverdueBooks()” method instead of the “GetBooks()” method
+              */
+            if ( filter=="on" )
+            {
+                ViewBag.Books=GetOverdueBooks();
+            }
+            else
+            {
+                ViewBag.Books=GetBooks();
+            }
+
             return View();
         }
 

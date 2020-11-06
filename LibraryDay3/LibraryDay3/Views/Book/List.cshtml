@@ -3,22 +3,31 @@
 }
 
 <h1>List</h1>
+@*Create a form with a checkbox “Filter to Overdue”.
+    When the page loads with the checkbox checked (query string parameter), call the “GetOverdueBooks()” method instead of the “GetBooks()” method
+*@
+<form action="/Book/List" method="get">
+    <label for="filter">Filter OverdueBooks</label>
+    <input type="checkbox" name="filter" @if ( ViewBag.Filter=="on" ) { @("checked") } />
+    <button type="submit">Filter</button>
+</form>
 
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Title</th>
-                <th>Author</th>
-                <th>Publication Date</th>
-                <th>Checked Out Date</th>
-                <th>Due Date</th>
-                <th>Returned Date</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ( Book book in ViewBag.Books )
-            {
+
+<table class="table table-striped table-dark">
+    <thead class="thead-light">
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Publication Date</th>
+            <th>Checked Out Date</th>
+            <th>Due Date</th>
+            <th>Returned Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach ( Book book in ViewBag.Books )
+        {
             <tr>
                 <td><a href="/Book/Details?id=@(book.ID)">@(book.ID)</a></td>
                 <td>@(book.Title)</td>
@@ -26,11 +35,11 @@
                 <td>@(book.PublicationDate.ToShortDateString())</td>
 
 
-              <td>@(book.GetCheckOutDate)</td>
-              <td>@(book.GetDueDate)</td>
+                <td>@(book.GetCheckOutDate)</td>
+                <td>@(book.GetDueDate)</td>
                 <td>@(book.GetReturnDate ==null ? "Not Returned" : book.GetReturnDate)</td>
 
             </tr>
-            }
-            </tbody>
-        </table>
+        }
+    </tbody>
+</table>

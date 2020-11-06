@@ -71,8 +71,8 @@ namespace LibraryDay3.Models
                    new Author()
                    {
                        ID=-5,
-                       Name="J.K. Rowling",
-                       BirthDate=new DateTime(1965,05,31)
+                       Name="Jane Austen",
+                       BirthDate=new DateTime(1775,05,31)
                    }
                 );
 
@@ -116,14 +116,14 @@ namespace LibraryDay3.Models
                             {
                                 ID=-2,
                                 Title="Harry Potter and the Order of the Phoenix",
-                                AuthorID=-5,
+                                AuthorID=-1,
                                 PublicationDate=new DateTime(1800,02,04),
                             },
                             new Book
                             {
                                 ID=-3,
                                 Title="Hamlet",
-                                AuthorID=-1,
+                                AuthorID=-2,
                                 PublicationDate=new DateTime(1980,03,06),
 
                             },
@@ -132,7 +132,7 @@ namespace LibraryDay3.Models
                             {
                                 ID=-4,
                                 Title="Harry Potter And The Philosopher's Stone",
-                                AuthorID=-5,
+                                AuthorID=-1,
                                 PublicationDate=new DateTime(2002,07,20),
                             },
 
@@ -140,7 +140,7 @@ namespace LibraryDay3.Models
                             {
                                 ID=-5,
                                 Title="The Casual Vacancy",
-                                AuthorID=-5,
+                                AuthorID=-3,
                                 PublicationDate=new DateTime(2012,11,10),
                             }
                             );
@@ -178,7 +178,7 @@ namespace LibraryDay3.Models
                         ID=-2,
                         BookID=-4,
                         CheckedOutDate=new DateTime(2019,12,25),
-                        //ne book must be returned on-time with one extension.
+                        //One book must be returned on-time with one extension.
                         DueDate=new DateTime(2019,12,25).AddDays(14).AddDays(7),
                         ReturnedDate=new DateTime(2019,12,25).AddDays(14).AddDays(4),
                         ExtensionCount=0
@@ -186,7 +186,7 @@ namespace LibraryDay3.Models
                    new Borrow()
                    {
                        ID=-3,
-                       BookID=-5,
+                       BookID=-1,
                        DueDate=new DateTime(2019,12,25).AddDays(14),
                        //One book must not have been returned at all!
                        ReturnedDate=null,
