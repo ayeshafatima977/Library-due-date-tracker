@@ -3,7 +3,7 @@
 }
 
 <h1>List</h1>
-@*
+
     <table>
         <thead>
             <tr>
@@ -19,22 +19,18 @@
         <tbody>
             @foreach ( Book book in ViewBag.Books )
             {
-                <tr>
-                    <td><a href="/Book/Details?id=@(book.ID)">@(book.ID)</a></td>
-                    <td>@(book.Title)</td>
-                    <td>@(book.AuthorID)</td>
-                    <td>@(book.PublicationDate.ToShortDateString())</td>
+            <tr>
+                <td><a href="/Book/Details?id=@(book.ID)">@(book.ID)</a></td>
+                <td>@(book.Title)</td>
+                <td>@(book.Author.Name)</td>
+                <td>@(book.PublicationDate.ToShortDateString())</td>
 
-                    }
-                </tr>
-                @foreach ( Borrow borrow in ViewBag.Books )
-                {
-                    <tr>
-                        <td>@(borrow.CheckedOutDate.ToShortDateString())</td>
-                        <td>@(borrow.DueDate.ToShortDateString())</td>
-                        <td>@(borrow.ReturnedDate==null?"Not Returned":((DateTime)book.Borrows.ReturnedDate).ToShortDateString())</td>
-                    </tr>
-                }
+
+              <td>@(book.GetCheckOutDate)</td>
+              <td>@(book.GetDueDate)</td>
+                <td>@(book.GetReturnDate ==null ? "Not Returned" : book.GetReturnDate)</td>
+
+            </tr>
+            }
             </tbody>
         </table>
-*@

@@ -16,6 +16,47 @@ namespace LibraryDay3.Models
         {
             Borrows=new HashSet<Borrow>();
         }
+
+        //Thankyou Oleg for the Work Around 
+        public string GetCheckOutDate
+        {
+
+           get {
+                var checkout = "This book hasnt been Checked out";
+                    if(Borrows.LastOrDefault()!=null)
+                {
+                    checkout=Borrows.LastOrDefault().CheckedOutDate.ToShortDateString();
+                }
+                return checkout;
+                    }
+        }
+     public string GetDueDate
+        {
+            get
+            {
+                var due = "This book Passed Due date";
+                if ( Borrows.LastOrDefault()!=null )
+                {
+                    due=Borrows.LastOrDefault().DueDate.ToShortDateString();
+                }
+                return due;
+            }
+        }
+        public string GetReturnDate
+        {
+
+            get
+            {
+                var returnDate = "This book hasnt been Returned";
+                if ( Borrows.LastOrDefault()!=null )
+                {
+                    returnDate=Borrows.LastOrDefault().CheckedOutDate.ToShortDateString();
+                }
+                return returnDate;
+            }
+        }
+
+
         [Key]
         [Column(TypeName = "int(10)")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
