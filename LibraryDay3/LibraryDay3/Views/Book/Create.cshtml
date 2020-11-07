@@ -3,7 +3,7 @@
     System.Diagnostics.Debug.WriteLine("VIEW - Rendering CREATE View\n-------------------------");
 }
 
-<h1>Add Book to your Basket</h1>
+<h1>Add a Book to your Basket</h1>
 
 <section>
     @{
@@ -33,14 +33,21 @@
 
                 @foreach ( Author author in ViewBag.Authors )
                 {
-                    <option value="@(author.ID)">@(author.Name)</option>
-                }
+                    @if ( author.ID.ToString()==ViewBag.AuthorID )
+                    {
+                        <option value="@(author.ID)" selected>@(author.Name)</option>
+                    }
+                    else
+                    {
+                        <option value="@(author.ID)">@(author.Name)</option>
+                    }
 
+                }
             </select>
         </div>
         <div>
             <label for="publicationDate">Publication Date</label>
-            <input type="date" id="publicationDate" name="publicationDate" value="" />
+            <input type="date" id="publicationDate" name="publicationDate" value="@(ViewBag.PublicationDate)" />
         </div>
 
         <button type="submit">Add Book</button>

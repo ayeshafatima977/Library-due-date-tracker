@@ -1,13 +1,4 @@
 ﻿
-/*“BorrowController” (Controller) class created:
-Add a “ExtendDueDateForBorrowByID()” method that will extend the “DueDate” by 7 days from today.
-Add a “ReturnBorrowByID()” method that will set the “Borrow”s “ReturnedDate” to today.
-Add a “CreateBorrow()” method that will accept a “Book.ID” as a parameter and create a borrow for it.
-The “CheckOutDate” will be today.
-The “DueDate” will be 14 days from today.
-The “ReturnedDate” will be null.
- */
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,23 +13,7 @@ using System.Linq.Expressions;
 namespace LibraryDay3.Controllers
 {
     public class BorrowController :Controller
-    {
-      // private readonly LibraryContext _context;
-
-      //  public static Borrow requiredBorrow { get; private set; }
-     
-        public DateTime DueDate { get; set; }
-        public DateTime CheckedOutDate { get; set; }
-
-        public DateTime? ReturnedDate { get; set; }
-        public int ExtensionCount { get; set; }
-
-/*
-        public BorrowController(LibraryContext context)
-        {
-            _context=context;
-        }*/
-
+    { 
 
         public IActionResult Index()
         {
@@ -47,6 +22,7 @@ namespace LibraryDay3.Controllers
 
         /*Add a “CreateBorrow()” method that will accept a “Book.ID” as a parameter and create a borrow for it. The “CheckOutDate” will be today.The “DueDate” will be 14 days from today. The “ReturnedDate” will be null.     */
 
+        //Static is used so that it can be acessed from anywhere else
         public static void CreateBorrow(int id)
         {
 
@@ -61,8 +37,6 @@ namespace LibraryDay3.Controllers
                     ExtensionCount=0
 
                 });
-
-                
                 context.SaveChanges();
             }
             
@@ -76,11 +50,9 @@ namespace LibraryDay3.Controllers
         public static void ExtendDueDateForBorrowByID(int id)
         {
             ValidationException exception = new ValidationException();
-
-            Borrow extendBook;
             using ( LibraryContext context = new LibraryContext() )
             {
-                extendBook=context.Borrows.Where(x => x.ID==id).Single();
+              Borrow extendBook = context.Borrows.Where(x => x.ID==id).SingleOrDefault();
 
                 // A book can only be extended a maximum of 3 times.
                 if ( extendBook.ExtensionCount < 3 && DateTime.Compare(DateTime.Today, extendBook.DueDate)<0 )
@@ -97,7 +69,6 @@ namespace LibraryDay3.Controllers
                     exception.newExceptions.Add(new Exception("Maximum Limit of Extensions Reached,Please Return the Book"));
                     throw exception;
                 } 
-                
                 else if ( DateTime.Compare(DateTime.Today,extendBook.DueDate)>0 )
                 {
                     // Overdue books cannot be extended.
@@ -109,18 +80,15 @@ namespace LibraryDay3.Controllers
             }
         }
 
-
-
         //Add a “ReturnBorrowByID()” method that will set the “Borrow”s “ReturnedDate” to today.//“ReturnedDate” cannot be prior to “CheckedOutDate”.
 
         public static void ReturnBorrowByID(int id)
         {
-            Borrow returnBook;
             ValidationException exception = new ValidationException();
 
             using ( LibraryContext context = new LibraryContext() )
             {
-                returnBook=context.Borrows.Where(x => x.ID==id).Single();
+              Borrow returnBook=context.Borrows.Where(x => x.ID==id).SingleOrDefault();
                 if ( DateTime.Compare(DateTime.Today,returnBook.DueDate)<0 )
                 {
                     returnBook.ReturnedDate=DateTime.Today;

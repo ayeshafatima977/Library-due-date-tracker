@@ -13,14 +13,11 @@ namespace LibraryDay3.Controllers
 {
     public class BookController :Controller
     {
-
         public IActionResult Index()
         {
 
             return RedirectToAction("List");
         }
-
-
 
         /*Action/View “Create”*/
 
@@ -54,20 +51,19 @@ namespace LibraryDay3.Controllers
 
         }
 
-
-        //Modify the output to account for the new models (show the property values from the related table
+        // When the page loads with the checkbox checked (query string parameter), call the “GetOverdueBooks()” method instead of the “GetBooks()” method
 
         public IActionResult List(string filter)
-        {
-            /*  When the page loads with the checkbox checked (query string parameter), call the “GetOverdueBooks()” method instead of the “GetBooks()” method
-              */
-            if ( filter=="on" )
+        { 
+            if ( filter=="overdue" )
             {
                 ViewBag.Books=GetOverdueBooks();
+                ViewBag.Filter=true;
             }
             else
             {
                 ViewBag.Books=GetBooks();
+                ViewBag.Filter=false;
             }
 
             return View();
@@ -117,10 +113,16 @@ namespace LibraryDay3.Controllers
 
                 if ( borrow!=null )
                 {
-                    BorrowController.CreateBorrow(int.Parse(id));
-                  
-                }
+                    try
+                    {
+                        CreateBorrow(int.Parse(id));
+                    }
+                    catch ( ValidationException e )
+                    {
+                        ViewBag.Exceptions=e;
+                    }
 
+                }
 
                 Book getBook = GetBookByID(int.Parse(id));
 
@@ -139,9 +141,11 @@ namespace LibraryDay3.Controllers
 
         }
         // These methods are for data management.Ensure that “CreateBook()” is no longer accepting an ID, as it is database generated
+
         public Book CreateBook(string title,int authorID,string publicationDate)
         {
             ValidationException exception = new ValidationException();
+
             //Trimmed all data prior to processing.,NOT NULL fields must have values that are not whitespace.
 
             if ( string.IsNullOrWhiteSpace(title) )
@@ -151,10 +155,7 @@ namespace LibraryDay3.Controllers
             }
             else
 
-            //   String data cannot exceed its database size.//All comparison validation must be case insensitive
-
-            //Book titles must be unique for that author.
-
+            //   String data cannot exceed its database size.//All comparison validation must be case insensitive.Book titles must be unique for that author.
             {
                 if ( title.Trim().Length>30 )
                 {
@@ -188,7 +189,6 @@ namespace LibraryDay3.Controllers
                 throw exception;
             }
 
-
            //Create a Book
             Book newBook = new Book()
                 {
@@ -218,15 +218,19 @@ namespace LibraryDay3.Controllers
             using ( LibraryContext context = new LibraryContext() )
             {
                 getBook=context.Books.Where(x => x.ID==(id)).Include(x => x.Author).Include(x => x.Borrows).SingleOrDefault();
-                /*
-                getBook=context.Books.Where(x => x.ID==id).Single();
-                getBook.Author=context.Authors.Where(x => x.ID==getBook.AuthorID).SingleOrDefault();*/
+            
             }
             return getBook;
         }
 
-        //Modify “ExtendDueDateForBookByID()” to call “BorrowController.ExtendDueDateForBorrowByID()”.
+        //Create Borrow
+        public void CreateBorrow(int id)
+        {
+            BorrowController.CreateBorrow(id);
+        }
 
+
+        //Modify “ExtendDueDateForBookByID()” to call “BorrowController.ExtendDueDateForBorrowByID()”.
 
         public static void ExtendDueDateForBookByID(int id)
         {
@@ -243,11 +247,11 @@ namespace LibraryDay3.Controllers
         // Method “DeleteBookByID()” to delete a book.
         public void DeleteBookByID(int id)
         {
-            Book deleteBook;
             using ( LibraryContext context = new LibraryContext() )
             {
-                deleteBook=context.Books.Where(x => x.ID==id).Single();
-                context.Books.Remove(deleteBook);
+              /*Long Way: Book deleteBook=context.Books.Where(x => x.ID==id).Single();
+                context.Books.Remove(deleteBook);*/
+                context.Books.Remove(GetBookByID(id));
                 context.SaveChanges();
             }
         }
@@ -259,12 +263,6 @@ namespace LibraryDay3.Controllers
             using ( LibraryContext context = new LibraryContext() )
             {
                 books=context.Books.Include(x => x.Author).Include(x => x.Borrows).ToList();
-
-
-                /* foreach ( Book book in books )
-                 {
-                     book.Author=context.Authors.Where(x => x.ID==book.AuthorID).Single();
-                 }*/
             }
             return books;
         }
@@ -272,25 +270,15 @@ namespace LibraryDay3.Controllers
         //Add a “GetOverdueBooks()” method to get a list of all books that have a due date prior to the current date.
         public List<Book> GetOverdueBooks()
         {
-            List<Book> overdueList = new List<Book>();
+            List<Book> overdueList;
 
             using ( LibraryContext context = new LibraryContext() )
 
-            //@Link: https://www.w3resource.com/csharp-exercises/datetime/csharp-datetime-exercise-17.php
-
             {
                 overdueList=context.Books.Include(x => x.Borrows.Last().DueDate<DateTime.Now).ToList();
-                //Where(x => DateTime.Compare(DateTime.Today,x.DueDate)>0&&x.ReturnedDate==null).ToList();
-
-                foreach ( Book book in overdueList )
-                {
-                    book.Author=context.Authors.Where(x => x.ID==book.AuthorID).Single();
-                }
             }
             return overdueList;
         }
-
-
 
         //Add a “GetAuthors()” method that will return a list of authors (for use in the Create “Book” view).
 

@@ -3,12 +3,9 @@
 }
 
 <h1>List</h1>
-@*Create a form with a checkbox “Filter to Overdue”.
-    When the page loads with the checkbox checked (query string parameter), call the “GetOverdueBooks()” method instead of the “GetBooks()” method
-*@
 <form action="/Book/List" method="get">
     <label for="filter">Filter Overdue Books</label>
-    <input type="checkbox" name="filter" @if ( ViewBag.Filter=="on" ) { @("checked") } />
+    <input type="checkbox" name="filter" value="overdue" @( ViewBag.Filter? "checked": "") />
     <button type="submit">Filter</button>
 </form>
 
@@ -37,14 +34,16 @@
 
                 @if ( book.Borrows.Count>0 )
                 {
-                    //Most latest date
-                <td>@(book.Borrows.OrderByDescending(x => x.CheckedOutDate).FirstOrDefault().DueDate.ToShortDateString())</td>
-                <td>@book.Borrows.OrderByDescending(x => x.CheckedOutDate).FirstOrDefault().CheckedOutDate.ToShortDateString())</td>
-                <td>@(book.Borrows.OrderByDescending(x => x.CheckedOutDate).FirstOrDefault().ReturnedDate==null ? "Not Returned" : ((DateTime) book.Borrows.OrderByDescending(x => x.CheckedOutDate).FirstOrDefault().ReturnedDate).ToShortDateString()))</td>
+    <tr>
+        
+        <td>@(book.Borrows.OrderByDescending(x => x.CheckedOutDate).FirstOrDefault().DueDate.ToShortDateString())</td>
+        <td>@book.Borrows.OrderByDescending(x => x.CheckedOutDate).FirstOrDefault().CheckedOutDate.ToShortDateString())</td>
+        <td>@(book.Borrows.OrderByDescending(x => x.CheckedOutDate).FirstOrDefault().ReturnedDate==null ? "Not Returned" : ((DateTime) book.Borrows.OrderByDescending(x => x.CheckedOutDate).FirstOrDefault().ReturnedDate).ToShortDateString()))</td>
 
-
+    </tr>
                     }
-                }
+          }
                 
     </tbody>
 </table>
+
