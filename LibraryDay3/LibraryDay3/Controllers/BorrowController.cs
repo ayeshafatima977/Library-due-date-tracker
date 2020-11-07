@@ -57,9 +57,9 @@ namespace LibraryDay3.Controllers
                 // A book can only be extended a maximum of 3 times.
                 if ( extendBook.ExtensionCount < 3 && DateTime.Compare(DateTime.Today, extendBook.DueDate)<0 )
                 {
-                    extendBook.DueDate=DateTime.Today.AddDays(7);
                     //Extend by one more time
                     extendBook.ExtensionCount+=1;
+                    extendBook.DueDate=DateTime.Today.AddDays(7);
                     context.SaveChanges();
                 }
                 //  if extension > 3 donot extend and throw Exception
