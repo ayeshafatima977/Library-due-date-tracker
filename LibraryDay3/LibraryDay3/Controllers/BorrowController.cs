@@ -89,7 +89,7 @@ namespace LibraryDay3.Controllers
             using ( LibraryContext context = new LibraryContext() )
             {
               Borrow returnBook=context.Borrows.Where(x => x.ID==id).SingleOrDefault();
-                if ( DateTime.Compare(DateTime.Today,returnBook.DueDate)<0 )
+                if ( DateTime.Compare(DateTime.Today,returnBook.DueDate)<0 )//wrong logic. This logic prevents me from returning a book until AFTER the due date. 
                 {
                     returnBook.ReturnedDate=DateTime.Today;
                     context.SaveChanges();
