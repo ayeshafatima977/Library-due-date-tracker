@@ -52,7 +52,7 @@ namespace LibraryDay3.Controllers
             ValidationException exception = new ValidationException();
             using ( LibraryContext context = new LibraryContext() )
             {
-              Borrow extendBook = context.Borrows.Where(x => x.ID==id).SingleOrDefault();
+              Borrow extendBook = context.Borrows.Where(x =>x.ID==id).SingleOrDefault();
 
                 // A book can only be extended a maximum of 3 times.
                 if ( extendBook.ExtensionCount < 3 && DateTime.Compare(DateTime.Today, extendBook.DueDate)<0 )

@@ -29,13 +29,13 @@
         <p>Returned Date: @(borrow.ReturnedDate==null ? "Not Returned" : ((DateTime) borrow.ReturnedDate).ToLongDateString())</p>
         <p>Number of extensions : @(borrow.ExtensionCount)</p>
     </section>
+   
+    <a class="btn btn-primary" href="/Book/Details?id=@(borrow.ID)&extend=true">Extend Deadline</a>
+    <a class="btn btn-success" href="/Book/Details?id=@(borrow.ID)&returned=true">Return Book</a>
+    <a class="btn btn-danger" href="/Book/Details?id=@(borrow.ID)&delete=true">Delete Book</a>
+    <a class="btn btn-secondary" href="/Book/Details?id=@(borrow.ID)&borrow=true">Borrow Book</a>
+
     }
-
-    <a class="btn btn-primary" href="/Book/Details?id=@(ViewBag.Book.ID)&extend=true">Extend Deadline</a>
-    <a class="btn btn-success" href="/Book/Details?id=@(ViewBag.Book.ID)&returned=true">Return Book</a>
-    <a class="btn btn-danger" href="/Book/Details?id=@(ViewBag.Book.ID)&delete=true">Delete Book</a>
-    <a class="btn btn-secondary" href="/Book/Details?id=@(ViewBag.Book.ID)&borrow=true">Borrow Book</a>
-
 
 }
 else

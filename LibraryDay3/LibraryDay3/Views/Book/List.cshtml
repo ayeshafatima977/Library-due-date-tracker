@@ -25,23 +25,28 @@
     <tbody>
         @foreach ( Book book in ViewBag.Books )
         {
-            <tr>
-                <td><a href="/Book/Details?id=@(book.ID)">@(book.ID)</a></td>
-                <td>@(book.Title)</td>
-                <td>@(book.Author.Name)</td>
-                <td>@(book.PublicationDate.ToShortDateString())</td>
-            </tr>
+        <tr>
+            <td><a href="/Book/Details?id=@(book.ID)">@(book.ID)</a></td>
+            <td>@(book.Title)</td>
+            <td>@(book.Author.Name)</td>
+            <td>@(book.PublicationDate.ToShortDateString())</td>
 
-                @if ( book.Borrows.Count>0 )
-                {
-    <tr>
-        
-        <td>@(book.Borrows.OrderByDescending(x => x.CheckedOutDate).FirstOrDefault().DueDate.ToShortDateString())</td>
-        <td>@book.Borrows.OrderByDescending(x => x.CheckedOutDate).FirstOrDefault().CheckedOutDate.ToShortDateString())</td>
-        <td>@(book.Borrows.OrderByDescending(x => x.CheckedOutDate).FirstOrDefault().ReturnedDate==null ? "Not Returned" : ((DateTime) book.Borrows.OrderByDescending(x => x.CheckedOutDate).FirstOrDefault().ReturnedDate).ToShortDateString()))</td>
 
-    </tr>
-                    }
+            @if ( book.Borrows.Count>0 )
+            {
+
+
+                <td>@(book.Borrows.OrderByDescending(x => x.CheckedOutDate).FirstOrDefault().DueDate.ToShortDateString())</td>
+                <td>@book.Borrows.OrderByDescending(x => x.CheckedOutDate).FirstOrDefault().CheckedOutDate.ToShortDateString())</td>
+                <td>@(book.Borrows.OrderByDescending(x => x.CheckedOutDate).FirstOrDefault().ReturnedDate==null ? "Not Returned" : ((DateTime) book.Borrows.OrderByDescending(x => x.CheckedOutDate).FirstOrDefault().ReturnedDate).ToShortDateString()))</td>
+            }
+            else
+            {
+            <td colspan="3" >Book Not Borrowed</td>
+           
+            }
+        </tr>
+                    
           }
                 
     </tbody>
