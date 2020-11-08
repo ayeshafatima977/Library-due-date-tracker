@@ -4,14 +4,13 @@
 
 <h1>Book Details</h1>
 <!--If an “id” query string parameter was supplied, use “GetBookByID()” and render: "You checked out {Title} on {CheckedOutDate}, and the due date is {DueDate}."-->
-@if ( ViewBag.Error!=null )
-{<p class="alert-danger">No book was selected.</p>
-}
+@*@if ( ViewBag.Error!=null )
+{<p class="alert-danger">Error occured,Cannot be Extened Further.</p>
+}*@
 
 @if ( ViewBag.Book!=null )
 {
     <section>
-        <h2>Book Details</h2>
         <p>Title: @(ViewBag.Book.Title)</p>
         <p>Author: @(ViewBag.Book.Author.Name)</p>
         <p>Publication Date: @(ViewBag.Book.PublicationDate.ToShortDateString())</p>
@@ -19,8 +18,10 @@
 
     if ( ViewBag.Book.Borrows.Count>0 )
     {
-
         Borrow borrow = ((Book) ViewBag.Book).Borrows.LastOrDefault();
+
+        //foreach ( Borrow borrowed in ViewBag.Book.Borrows )
+        //{
 
     <section>
         <h2>Library Details</h2>
@@ -29,12 +30,14 @@
         <p>Returned Date: @(borrow.ReturnedDate==null ? "Not Returned" : ((DateTime) borrow.ReturnedDate).ToLongDateString())</p>
         <p>Number of extensions : @(borrow.ExtensionCount)</p>
     </section>
-   
+
+ 
     <a class="btn btn-primary" href="/Book/Details?id=@(borrow.ID)&extend=true">Extend Deadline</a>
     <a class="btn btn-success" href="/Book/Details?id=@(borrow.ID)&returned=true">Return Book</a>
     <a class="btn btn-danger" href="/Book/Details?id=@(borrow.ID)&delete=true">Delete Book</a>
     <a class="btn btn-secondary" href="/Book/Details?id=@(borrow.ID)&borrow=true">Borrow Book</a>
 
+        //}
     }
 
 }
