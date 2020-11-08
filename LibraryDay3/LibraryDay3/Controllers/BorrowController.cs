@@ -20,7 +20,7 @@ namespace LibraryDay3.Controllers
             return View();
         }
 
-        /*Add a “CreateBorrow()” method that will accept a “Book.ID” as a parameter and create a borrow for it. The “CheckOutDate” will be today.The “DueDate” will be 14 days from today. The “ReturnedDate” will be null.     */
+        /*Add a “CreateBorrow()” method that will accept a “Book.ID” as a parameter and create a borrow for it. The “CheckOutDate” will be today.The “DueDate” will be 14 days from today. The “ReturnedDate” will be null. */
 
         //Static is used so that it can be acessed from anywhere else
         public static void CreateBorrow(int id)
@@ -49,7 +49,7 @@ namespace LibraryDay3.Controllers
 
         public static void ExtendDueDateForBorrowByID(int id)
         {
-            ValidationException exception = new ValidationException();
+            ValidationExceptions exception = new ValidationExceptions();
             using ( LibraryContext context = new LibraryContext() )
             {
               Borrow extendBook = context.Borrows.Where(x =>x.ID==id).SingleOrDefault();
@@ -76,8 +76,6 @@ namespace LibraryDay3.Controllers
                     exception.newExceptions.Add(new Exception("Please Note: Book is Overdue and cannot be extended, Please return the Book and try again later."));
                     throw exception;
                 }
-
-               // context.SaveChanges();
             }
         }
 
@@ -85,12 +83,11 @@ namespace LibraryDay3.Controllers
 
         public static void ReturnBorrowByID(int id)
         {
-            ValidationException exception = new ValidationException();
+            ValidationExceptions exception = new ValidationExceptions();
 
             using ( LibraryContext context = new LibraryContext() )
             {
                
-             //   if(returnBook!= null)
               { 
               Borrow returnBook=context.Borrows.Where(x => x.BookID == id).SingleOrDefault();
                 if ( DateTime.Compare(DateTime.Now,returnBook.DueDate)<0 ) 

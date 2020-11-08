@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace LibraryDay3.Models.Exceptions
 {
-    public class ValidationException:Exception
+    public class ValidationExceptions:Exception
     {
         // A list of exceptions shown as one Exception
         public List<Exception> newExceptions { get; set; } = new List<Exception>();
@@ -14,10 +14,10 @@ namespace LibraryDay3.Models.Exceptions
         public override string Message => $"There are {newExceptions.Count} exceptions.";
 
         //Default Exception just for case of override
-        public ValidationException() : base()
+        public ValidationExceptions() : base()
         { }
 
-        public ValidationException(string message) : base("Please view ValidationExceptions for details.")
+        public ValidationExceptions(string message) : base("Please view ValidationExceptions for details.")
         {
             // When we construct this exception with a message, it gets added to the newexceptions list.
             newExceptions.Add(new Exception(message));

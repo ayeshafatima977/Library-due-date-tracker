@@ -37,7 +37,7 @@
                     @if ( book.Borrows.Count>0 )
                     {
                         <td>@(book.Borrows.OrderByDescending(x => x.CheckedOutDate).FirstOrDefault().DueDate.ToShortDateString())</td>
-                        <td>@book.Borrows.OrderByDescending(x => x.CheckedOutDate).FirstOrDefault().CheckedOutDate.ToShortDateString())</td>
+                        <td>@(book.Borrows.OrderByDescending(x => x.CheckedOutDate).FirstOrDefault().CheckedOutDate.ToShortDateString())</td>
                         <td>@(book.Borrows.OrderByDescending(x => x.CheckedOutDate).FirstOrDefault().ReturnedDate==null?"Not Returned":((DateTime)book.Borrows.OrderByDescending(x => x.CheckedOutDate).FirstOrDefault().ReturnedDate).ToShortDateString())</td>
                     }
                     else

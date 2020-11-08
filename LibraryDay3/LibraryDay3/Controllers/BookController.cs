@@ -35,7 +35,7 @@ namespace LibraryDay3.Controllers
 
                 }
                 // Catch ONLY ValidationException. Any other Exceptions (FormatException, DivideByZeroException, etc) will not get caught, and will break the whole program.
-                catch ( ValidationException e )
+                catch ( ValidationExceptions e )
                 {
                     ViewBag.Exception=e;
                     //To have the data stored on the form even if it refreshes / their is an  error
@@ -106,7 +106,7 @@ namespace LibraryDay3.Controllers
                     ExtendDueDateForBookByID(bookId);
                     return RedirectToAction("List");
                 }
-                catch ( ValidationException e )
+                catch ( ValidationExceptions e )
                 {
                     ViewBag.Exceptions=e;
                     //return View();
@@ -121,7 +121,7 @@ namespace LibraryDay3.Controllers
                     //BorrowController.CreateBorrow(bookId);
                     //return View();
                 }
-                catch ( ValidationException e )
+                catch ( ValidationExceptions e )
                 {
                     ViewBag.Exceptions=e;
                     //return View();
@@ -135,7 +135,7 @@ namespace LibraryDay3.Controllers
                     CreateBorrow(bookId);
                     //return View();
                 }
-                catch ( ValidationException e )
+                catch ( ValidationExceptions e )
                 {
                     ViewBag.Exceptions=e;
                     //return View();
@@ -149,7 +149,7 @@ namespace LibraryDay3.Controllers
 
         public Book CreateBook(string title,int authorID,string publicationDate)
         {
-            ValidationException exception = new ValidationException();
+            ValidationExceptions exception = new ValidationExceptions();
 
             //Trimmed all data prior to processing.,NOT NULL fields must have values that are not whitespace.
 
@@ -174,10 +174,7 @@ namespace LibraryDay3.Controllers
 
             }
 
-            /*“CheckedOutDate” cannot be prior to “PublicationDate”.
-           “ReturnedDate” cannot be prior to “CheckedOutDate”.
-    “           PublishedDate” cannot be in the future
-            */
+            /*“CheckedOutDate” cannot be prior to “PublicationDate”. “ReturnedDate” cannot be prior to “CheckedOutDate” ; PublishedDate” cannot be in the future  */
 
             if ( publicationDate==null )
             {
