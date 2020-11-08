@@ -1,54 +1,55 @@
 ﻿@{
     ViewData["Title"]="List";
 }
+<div class="p-3 mb-2 bg-info text-white">
+    <h1 class="h1">List of Books</h1>
+</div>
+    @*Filter for Overdue*@
+    <form action="/Book/List" method="get">
+        <label for="filter" >Filter Overdue Books</label>
+        <input type="checkbox" name="filter" value="overdue" @( ViewBag.Filter ? "checked" : "") />
+        <button type="submit" class="btn btn-primary active">Filter</button>
+    </form>
 
-<h1>List</h1>
-@*Filter for Overdue*@
-<form action="/Book/List" method="get">
-    <label for="filter">Filter Overdue Books</label>
-    <input type="checkbox" name="filter" value="overdue" @( ViewBag.Filter ? "checked" : "") />
-    <button type="submit">Filter</button>
-</form>
-
-@if ( ViewBag.Books.Count>0 )
-{
-    <table class="table table-striped table-dark">
-        <thead class="thead-light">
-            <tr>
-                <th>ID</th>
-                <th>Title</th>
-                <th>Author</th>
-                <th>Publication Date</th>
-                <th>Checked Out Date</th>
-                <th>Due Date</th>
-                <th>Returned Date</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ( Book book in ViewBag.Books )
-            {
-            <tr>
-                <td>@(book.ID)</td>
-                <td><a href="/Book/Details?id=@(book.ID)"> @(book.Title) </a></td>
-                <td>@(book.Author.Name)</td>
-                <td>@(book.PublicationDate.ToShortDateString())</td>
-
-
-                @if ( book.Borrows.Count>0 )
+    @if ( ViewBag.Books.Count>0 )
+    {
+        <table class="table table-striped table-hover">
+            <thead class="thead-light">
+                <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Publication Date</th>
+                    <th>Checked Out Date</th>
+                    <th>Due Date</th>
+                    <th>Returned Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ( Book book in ViewBag.Books )
                 {
-                    <td>@(book.Borrows.OrderByDescending(x => x.CheckedOutDate).FirstOrDefault().CheckedOutDate.ToShortDateString())</td>
-                    <td>@(book.Borrows.OrderByDescending(x => x.CheckedOutDate).FirstOrDefault().DueDate.ToShortDateString())</td>
+                    <tr class="info">
+                        <td>@(book.ID)</td>
+                        <td><a href="/Book/Details?id=@(book.ID)"> @(book.Title) </a></td>
+                        <td>@(book.Author.Name)</td>
+                        <td>@(book.PublicationDate.ToShortDateString())</td>
 
-                    <td>@(book.Borrows.OrderByDescending(x => x.CheckedOutDate).FirstOrDefault().ReturnedDate==null?"Not Returned":((DateTime)book.Borrows.OrderByDescending(x => x.CheckedOutDate).FirstOrDefault().ReturnedDate).ToShortDateString())</td>
-                }
-                else
-                {
-                    <td colspan="3">Book Not Borrowed</td>
-                }
-            </tr>
 
-            }
-        </tbody>
-    </table>
-}
+                        @if ( book.Borrows.Count>0 )
+                        {
+                            <td>@(book.Borrows.OrderByDescending(x => x.CheckedOutDate).FirstOrDefault().CheckedOutDate.ToShortDateString())</td>
+                            <td>@(book.Borrows.OrderByDescending(x => x.CheckedOutDate).FirstOrDefault().DueDate.ToShortDateString())</td>
+
+                            <td>@(book.Borrows.OrderByDescending(x => x.CheckedOutDate).FirstOrDefault().ReturnedDate==null?"Not Returned":((DateTime)book.Borrows.OrderByDescending(x => x.CheckedOutDate).FirstOrDefault().ReturnedDate).ToShortDateString())</td>
+                        }
+                        else
+                        {
+                            <td colspan="3">Book Not Borrowed</td>
+                        }
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+    }
 

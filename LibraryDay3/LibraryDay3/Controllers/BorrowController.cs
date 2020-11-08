@@ -46,7 +46,6 @@ namespace LibraryDay3.Controllers
         //Add a “ExtendDueDateForBorrowByID()” method that will extend the “DueDate” by 7 days from today.
         //An extension must actually extend the due date in order to be valid. Overdue books cannot be extended. Books cannot be extended more than 3 times.
 
-
         public static void ExtendDueDateForBorrowByID(int id)
         {
             ValidationExceptions exception = new ValidationExceptions();

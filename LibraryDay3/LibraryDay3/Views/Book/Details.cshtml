@@ -1,10 +1,12 @@
 ﻿@{
     ViewData["Title"]="Details";
 }
+<div class="p-3 mb-2 bg-info text-white">
+    <h1 class="h1">Book Details</h1>
+</div>
 @{
     if ( ViewBag.Error!=null )
     {
-        <h1>Details</h1>
         <p class="alert-danger">No book was selected.</p>
     }
     else if ( ViewBag.Exception!=null )
@@ -19,39 +21,38 @@
         <p>@($"You checked out {ViewBag.Book.Title} on {ViewBag.Book.CheckedOutDate.ToLongDateString()} and is/was due on {ViewBag.Book.DueDate.ToLongDateString()}.")</p>
 
     }
- }
-        <h1>Book Details</h1>
+}
 
-        @if ( ViewBag.Book!=null )
-        {
-            <section>
-                <p>Title: @(ViewBag.Book.Title)</p>
-                <p>Author: @(ViewBag.Book.Author.Name)</p>
-                <p>Publication Date: @(ViewBag.Book.PublicationDate.ToShortDateString())</p>
-            </section>
+@if ( ViewBag.Book!=null )
+{
+    <section>
+        <p>Title: @(ViewBag.Book.Title)</p>
+        <p>Author: @(ViewBag.Book.Author.Name)</p>
+        <p>Publication Date: @(ViewBag.Book.PublicationDate.ToShortDateString())</p>
+    </section>
 
-            if ( ViewBag.Book.Borrows.Count>0 )
-            {
-                Borrow borrow = ((Book) ViewBag.Book).Borrows.LastOrDefault();
-                <section>
-                    <h2>Library Details</h2>
-                    <p>Checked Out Date: @(borrow.CheckedOutDate.ToShortDateString())</p>
-                    <p>Due Date: @(borrow.DueDate.ToShortDateString())</p>
-                    <p>Returned Date: @(borrow.ReturnedDate==null ? "Not Returned" : ((DateTime) borrow.ReturnedDate).ToLongDateString())</p>
-                    <p>Number of extensions : @(borrow.ExtensionCount)</p>
-                </section>
-                <a class="btn btn-primary" href="/Book/Details?id=@(ViewBag.Book.ID)&extend=true">Extend Deadline</a>
-                <a class="btn btn-success" href="/Book/Details?id=@(ViewBag.Book.ID)&returned=true">Return Book</a>
-            }
-            <a class="btn btn-danger" href="/Book/Details?id=@(ViewBag.Book.ID)&delete=true">Delete Book</a>
-            <a class="btn btn-secondary" href="/Book/Details?id=@(ViewBag.Book.ID)&borrow=true">Borrow Book</a>
+    if ( ViewBag.Book.Borrows.Count>0 )
+    {
+        Borrow borrow = ((Book) ViewBag.Book).Borrows.LastOrDefault();
+        <section>
+            <h2>Library Details</h2>
+            <p>Checked Out Date: @(borrow.CheckedOutDate.ToShortDateString())</p>
+            <p>Due Date: @(borrow.DueDate.ToShortDateString())</p>
+            <p>Returned Date: @(borrow.ReturnedDate==null ? "Not Returned" : ((DateTime) borrow.ReturnedDate).ToLongDateString())</p>
+            <p>Number of extensions : @(borrow.ExtensionCount)</p>
+        </section>
+        <a class="btn btn-primary" href="/Book/Details?id=@(ViewBag.Book.ID)&extend=true">Extend Deadline</a>
+        <a class="btn btn-success" href="/Book/Details?id=@(ViewBag.Book.ID)&returned=true">Return Book</a>
+    }
+    <a class="btn btn-danger" href="/Book/Details?id=@(ViewBag.Book.ID)&delete=true">Delete Book</a>
+    <a class="btn btn-secondary" href="/Book/Details?id=@(ViewBag.Book.ID)&borrow=true">Borrow Book</a>
 
-        }
-        else
-        {
-            <p>
-                Error Occured to Display the Book Details. Click <a href="/Book/List">
-                    Here to return back to the Book List
-                </a>
-            </p>
-        }
+}
+else
+{
+    <p>
+        Error Occured to Display the Book Details. Click <a href="/Book/List">
+            Here to return back to the Book List
+        </a>
+    </p>
+}

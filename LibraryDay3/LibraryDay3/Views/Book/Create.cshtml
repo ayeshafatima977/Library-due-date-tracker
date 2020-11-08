@@ -2,8 +2,9 @@
     ViewData["Title"]="Create";
     System.Diagnostics.Debug.WriteLine("VIEW - Rendering CREATE View\n-------------------------");
 }
-
-<h1>Add a Book to your Basket</h1>
+<div class="p-3 mb-2 bg-info text-white">
+    <h1 class="h1">Create a Book</h1>
+</div>
 
 <section>
     @{
@@ -28,15 +29,15 @@
 </section>
 
 <section>
-    <form action="/Book/Create" method="get">
+    <form action="/Book/Create" method="get" >
 
-        <div>
-            <label for="title">Title</label>
+        <div class="form-group">
+            <label for="title" class="control-label col-md-3">Title</label>
             <input type="text" id="title" name="title" value="" />
         </div>
-        <div>
-            <label for="author_id">Author</label>
-            <select id="authorID" name="authorID">
+        <div class="form-group">
+            <label for="author_id" class="control-label col-md-3">Author</label>
+            <select id="authorID" name="authorID" class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
 
                 @foreach ( Author author in ViewBag.Authors )
                 {
@@ -52,12 +53,12 @@
                 }
             </select>
         </div>
-        <div>
-            <label for="publicationDate">Publication Date</label>
+        <div class="form-group">
+            <label for="publicationDate" class="control-label col-md-3">Publication Date</label>
             <input type="date" id="publicationDate" name="publicationDate" value="@(ViewBag.PublicationDate)" />
         </div>
 
-        <button type="submit">Add Book</button>
+        <button type="submit" class="btn btn-primary" >Add Book</button>
     </form>
 
 </section>
