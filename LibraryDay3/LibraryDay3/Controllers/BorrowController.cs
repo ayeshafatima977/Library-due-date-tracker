@@ -57,14 +57,15 @@ namespace LibraryDay3.Controllers
                 // A book can only be extended a maximum of 3 times.
                 if ( extendBook.ExtensionCount < 3 && DateTime.Compare(DateTime.Today, extendBook.DueDate)<0 )
                 {
+                    //Extend the due date 
+                    extendBook.DueDate=DateTime.Today.AddDays(7);
                     //Extend by one more time
                     extendBook.ExtensionCount+=1;
-                    extendBook.DueDate=DateTime.Today.AddDays(7);
                     context.SaveChanges();
                 }
-                //  if extension > 3 donot extend and throw Exception
+                //  if extension is morethan 3  donot extend and throw Exception
                 else
-                if ( extendBook.ExtensionCount >=3 )  
+                if ( extendBook.ExtensionCount ==3 )  
                 {  
                     exception.newExceptions.Add(new Exception("Maximum Limit of Extensions Reached,Please Return the Book"));
                     throw exception;
@@ -76,7 +77,7 @@ namespace LibraryDay3.Controllers
                     throw exception;
                 }
 
-                context.SaveChanges();
+               // context.SaveChanges();
             }
         }
 
@@ -92,7 +93,7 @@ namespace LibraryDay3.Controllers
              //   if(returnBook!= null)
               { 
               Borrow returnBook=context.Borrows.Where(x => x.BookID == id).SingleOrDefault();
-                if ( DateTime.Compare(DateTime.Now,returnBook.DueDate)<0 )   //wrong logic. This logic prevents me from returning a book until AFTER the due date. 
+                if ( DateTime.Compare(DateTime.Now,returnBook.DueDate)<0 ) 
                 {
 
                     returnBook.ReturnedDate=DateTime.Now;

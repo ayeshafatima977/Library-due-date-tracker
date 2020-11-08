@@ -19,10 +19,6 @@
     if ( ViewBag.Book.Borrows.Count>0 )
     {
         Borrow borrow = ((Book) ViewBag.Book).Borrows.LastOrDefault();
-
-        //foreach ( Borrow borrowed in ViewBag.Book.Borrows )
-        //{
-
         <section>
             <h2>Library Details</h2>
             <p>Checked Out Date: @(borrow.CheckedOutDate.ToShortDateString())</p>
@@ -30,14 +26,14 @@
             <p>Returned Date: @(borrow.ReturnedDate==null ? "Not Returned" : ((DateTime) borrow.ReturnedDate).ToLongDateString())</p>
             <p>Number of extensions : @(borrow.ExtensionCount)</p>
         </section>
+        <a class="btn btn-primary" href="/Book/Details?id=@(ViewBag.Book.ID)&extend=true">Extend Deadline</a>
+        <a class="btn btn-success" href="/Book/Details?id=@(ViewBag.Book.ID)&returned=true">Return Book</a>
 
 
 
 
         //}
     }
-    <a class="btn btn-primary" href="/Book/Details?id=@(ViewBag.Book.ID)&extend=true">Extend Deadline</a>
-    <a class="btn btn-success" href="/Book/Details?id=@(ViewBag.Book.ID)&returned=true">Return Book</a>
     <a class="btn btn-danger" href="/Book/Details?id=@(ViewBag.Book.ID)&delete=true">Delete Book</a>
     <a class="btn btn-secondary" href="/Book/Details?id=@(ViewBag.Book.ID)&borrow=true">Borrow Book</a>
 
@@ -46,7 +42,7 @@ else
 {
     <p>
         Error Occured to Display the Book Details. Click <a href="/Book/List">
-            Here to return back to the Book List
+        Here to return back to the Book List
         </a>
     </p>
 }

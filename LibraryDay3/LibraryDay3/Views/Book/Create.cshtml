@@ -7,14 +7,21 @@
 
 <section>
     @{
+        //Display itemized errors on all appropriate “Book” view pages.
         if ( ViewBag.Sucess!=null )
         {
             <p class="btn btn-success">Congratuations,@(ViewBag.Sucess)</p>
         }
 
-        else if ( ViewBag.Error!=null )
+        else if ( ViewBag.Exception!=null )
         {
-            <p class="btn btn-danger">Oops,@(ViewBag.Error)</p>
+            <p class="alert-danger">Following Errors Occured : Please Correct and resubmit</p>
+            <ul class="alert-danger">
+                @foreach ( Exception e in ViewBag.Exception.newExceptions )
+                {
+                    <li>@(e.Message)</li>
+                }
+            </ul>
         }
     }
 
