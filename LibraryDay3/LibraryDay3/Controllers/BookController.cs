@@ -226,7 +226,7 @@ namespace LibraryDay3.Controllers
         }
 
         //Create Borrow
-        public void CreateBorrow(int id)
+        public static void CreateBorrow(int id)
         {
             BorrowController.CreateBorrow(id);
         }
