@@ -44,7 +44,7 @@ namespace LibraryDay3.Controllers
 
 
         //Add a “ExtendDueDateForBorrowByID()” method that will extend the “DueDate” by 7 days from today.
-        //An extension must actually extend the due date in order to be valid. Overdue books cannot be extended.  Books cannot be extended more than 3 times.
+        //An extension must actually extend the due date in order to be valid. Overdue books cannot be extended. Books cannot be extended more than 3 times.
 
 
         public static void ExtendDueDateForBorrowByID(int id)
@@ -52,13 +52,15 @@ namespace LibraryDay3.Controllers
             ValidationExceptions exception = new ValidationExceptions();
             using ( LibraryContext context = new LibraryContext() )
             {
-              Borrow extendBook = context.Borrows.Where(x =>x.ID==id).SingleOrDefault();
+              Borrow extendBook = context.Borrows.Where(x =>x.BookID==id).SingleOrDefault();
 
                 // A book can only be extended a maximum of 3 times.
-                if ( extendBook.ExtensionCount < 3 && DateTime.Compare(DateTime.Today, extendBook.DueDate)<0 )
+                //Thanks Aaron.B for helping me correcting my logic.The Book can be extended once in a day and Can be extended maximum 3 times.If user extend the book it will extend it to 14 days from Todays date;
+
+                if ( extendBook.ExtensionCount < 3 &&  extendBook.DueDate <DateTime.Today.AddDays(14) )
                 {
                     //Extend the due date 
-                    extendBook.DueDate=DateTime.Today.AddDays(7);
+                    extendBook.DueDate=DateTime.Today.AddDays(14);
                     //Extend by one more time
                     extendBook.ExtensionCount+=1;
                     context.SaveChanges();

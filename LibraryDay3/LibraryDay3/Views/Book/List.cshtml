@@ -27,24 +27,25 @@
         <tbody>
             @foreach ( Book book in ViewBag.Books )
             {
-                <tr>
-                    <td>@(book.ID)</td>
-                    <td><a href="/Book/Details?id=@(book.ID)"> @(book.Title) </a></td>
-                    <td>@(book.Author.Name)</td>
-                    <td>@(book.PublicationDate.ToShortDateString())</td>
+            <tr>
+                <td>@(book.ID)</td>
+                <td><a href="/Book/Details?id=@(book.ID)"> @(book.Title) </a></td>
+                <td>@(book.Author.Name)</td>
+                <td>@(book.PublicationDate.ToShortDateString())</td>
 
 
-                    @if ( book.Borrows.Count>0 )
-                    {
-                        <td>@(book.Borrows.OrderByDescending(x => x.CheckedOutDate).FirstOrDefault().DueDate.ToShortDateString())</td>
-                        <td>@(book.Borrows.OrderByDescending(x => x.CheckedOutDate).FirstOrDefault().CheckedOutDate.ToShortDateString())</td>
-                        <td>@(book.Borrows.OrderByDescending(x => x.CheckedOutDate).FirstOrDefault().ReturnedDate==null?"Not Returned":((DateTime)book.Borrows.OrderByDescending(x => x.CheckedOutDate).FirstOrDefault().ReturnedDate).ToShortDateString())</td>
-                    }
-                    else
-                    {
-                        <td colspan="3">Book Not Borrowed</td>
-                    }
-                </tr>
+                @if ( book.Borrows.Count>0 )
+                {
+                    <td>@(book.Borrows.OrderByDescending(x => x.CheckedOutDate).FirstOrDefault().CheckedOutDate.ToShortDateString())</td>
+                    <td>@(book.Borrows.OrderByDescending(x => x.CheckedOutDate).FirstOrDefault().DueDate.ToShortDateString())</td>
+
+                    <td>@(book.Borrows.OrderByDescending(x => x.CheckedOutDate).FirstOrDefault().ReturnedDate==null?"Not Returned":((DateTime)book.Borrows.OrderByDescending(x => x.CheckedOutDate).FirstOrDefault().ReturnedDate).ToShortDateString())</td>
+                }
+                else
+                {
+                    <td colspan="3">Book Not Borrowed</td>
+                }
+            </tr>
 
             }
         </tbody>
