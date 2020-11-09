@@ -54,7 +54,7 @@ namespace LibraryDay3.Controllers
               Borrow extendBook = context.Borrows.Where(x =>x.BookID==id).SingleOrDefault();
 
                 // A book can only be extended a maximum of 3 times.
-                //Thanks Aaron.B for helping me correcting my logic.The Book can be extended once in a day and Can be extended maximum 3 times.If user extend the book it will extend it to 14 days from Todays date;
+                //Thanks Aaron.B for helping me correcting my logic.The Book can be extended once in a day and Can be extended maximum 3 times.If user extend the book it will extend it and set due date to be 14 days from Todays date;Note:Extension will be updated Next day becuase of DateTime.Today,So We can test this by manually changing the due date to 18/11/2020 For Example in database we changed Due date to be 18/11 and hit Extend it will increase the Extension Count by 1.Please check the image folder for test result
 
                 if ( extendBook.ExtensionCount < 3 &&  extendBook.DueDate <DateTime.Today.AddDays(14) )
                 {
