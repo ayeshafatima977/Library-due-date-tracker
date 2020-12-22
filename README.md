@@ -64,11 +64,11 @@ PM> dotnet ef update database
 
 The result of successful database migration and update is shown below in [PHPMyAdmin](https://www.phpmyadmin.net/) `localhost` with the database name **mvc_library**.
 
-![SeedData Sucessfull](/OutputImages/SeedData Sucessfull.PNG)
+![Database](/OutputImages/SeedData Sucessfull.PNG)
 
 ###### Note: For complete details
 
-![Output images](Library-Day3/OutputImages/)
+![Output images](/Library-Day3/OutputImages/)
 
 ## Usage/Approach
 
@@ -83,7 +83,7 @@ Please visit above link or visit Trello Board for full requirement of the projec
 
 1. https://trello.com/b/2rbxpdVk/library-due-date-tracker-aspnet
 
-# References:
+## References:
 
 1. [MVC Review](https://github.com/TECHCareers-by-Manpower/4.2-MVC)
 2. [Add Data in Home Page](https://www.learnrazorpages.com/razor-pages/tutorial/bakery/working-with-data)
