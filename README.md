@@ -64,7 +64,7 @@ PM> dotnet ef update database
 
 The result of successful database migration and update is shown below in [PHPMyAdmin](https://www.phpmyadmin.net/) `localhost` with the database name **mvc_library**.
 
-![DataBase](/OutputImages/SeedData Sucessfull.PNG)
+![SeedData Sucessfull](/OutputImages/SeedData Sucessfull.PNG)
 
 ###### Note: For complete details
 
