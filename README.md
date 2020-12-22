@@ -66,6 +66,10 @@ The result of successful database migration and update is shown below in [PHPMyA
 
 ![DataBase](/OutputImages/SeedData Sucessfull.PNG)
 
+###### Note: For complete details
+
+![Output images](Library-Day3/OutputImages/)
+
 ## Usage/Approach
 
 - Start the Debugging tool within Visual Studio 2019.
