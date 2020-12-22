@@ -60,9 +60,9 @@ PM> dotnet ef update database
 
 ## Requirements of Project:
 
-## Note:This is a Cumalative Assignment and Continuation of [Library Day2] (https://github.com/ayeshafatima977/Library-Day-2.git)
+###### Note:This is a Cumulative Assignment and Continuation of [Library Day2](https://github.com/ayeshafatima977/Library-Day-2.git)
 
-Please visit above link or visit Trelo Board for full requirement of the project.
+Please visit above link or visit Trello Board for full requirement of the project.
 
 ## Trello Link:
 
