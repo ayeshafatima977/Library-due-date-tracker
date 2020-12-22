@@ -15,11 +15,11 @@ The purpose of the project is to create a tool that will help you keep track of 
 ## Note:This is a Cumalitive Assignment and Continuation of https://github.com/TECHCareers-by-Manpower/dotnet-core-practice---library-due-date-tracker-day-2-ayeshafatima977.git 
 Please visit above link or visit Trelo Board for full requirement of the project.
 
-1. Modify “Borrow” (Model):
-2. Add a property “ExtensionCount” - int(10), not nullable.
-3. Update your seed data for this table to include values for this field. Add a migration.
-4. Update the database.
-5.0 Modify “List” (View / Action):
+:books: Modify “Borrow” (Model):
+:books: Add a property “ExtensionCount” - int(10), not nullable.
+:books: Update your seed data for this table to include values for this field. Add a migration.
+:books: Update the database.
+5. Modify “List” (View / Action):
 	5.1 Create a form with a checkbox “Filter to Overdue”. When the page loads with the checkbox checked (query string parameter), call the “GetOverdueBooks()” method instead of the “GetBooks()” method.
 6.0 Modify “Details” (View / Action):
 	6.1 Add a “Number of Extensions” line / output.
