@@ -25,6 +25,15 @@ The purpose of the project is to create a tool that will help to keep track of a
 - The creation of customized **Exceptions** as `ValidationExceptions.cs`to generate custom **Exception** messages.
 - The use of LINQ to conduct queries.
 
+## Prerequisites
+
+- Library due date Tracker requires [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/) (VS 2019) and [ASP.NET Core 3.1](https://docs.microsoft.com/en-us/aspnet/core/introduction-to-aspnet-core?view=aspnetcore-3.1)
+- This application requires a few packages installation through [NuGet](https://docs.microsoft.com/en-us/nuget/what-is-nuget)
+- [Entity Framework (EF) Core](https://docs.microsoft.com/en-us/ef/core/) is used in this application to perform data access against the [MySQL](https://dev.mysql.com/doc/refman/5.7/en/) database ([MariaDB](https://mariadb.org/)) and server ([Apache](https://httpd.apache.org/))
+- This application requires the use of [Code First Migrations](https://docs.microsoft.com/en-us/ef/core/managing-schemas/migrations/?tabs=dotnet-core-cli) using EF in .NET Core to set up databases with dummy data
+- This application requires a fundamental knowledge of [SQL](https://dev.mysql.com/doc/refman/5.7/en/) Syntax
+- Developers tools such as [XAMPP](https://www.apachefriends.org/index.html) are recommended to engage and use this application
+
 ## Installation
 
 ```bash
@@ -53,12 +62,14 @@ PM> dotnet ef migrations add InitialCreation
 PM> dotnet ef update database
 ```
 
+The result of successful database migration and update is shown below in [PHPMyAdmin](https://www.phpmyadmin.net/) `localhost` with the database name **mvc_library**.
+
+![DataBase](/OutputImages/SeedData Sucessfull.PNG)
+
 ## Usage/Approach
 
 - Start the Debugging tool within Visual Studio 2019.
 - A browser will automatically open to show a view of the database.
-
-## Requirements of Project:
 
 ###### Note:This is a Cumulative Assignment and Continuation of [Library Day2](https://github.com/ayeshafatima977/Library-Day-2.git)
 
