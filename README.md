@@ -83,9 +83,9 @@ Note: **AuthorController** `Index()` view was created using scaffold, **MVC Cont
 - Start the Debugging tool within Visual Studio 2019.
 - A browser will automatically open to show a view of the database.
 
-###### Note:This is a Cumulative Assignment and Continuation of [Library Day2](https://github.com/ayeshafatima977/Library-Day-2.git)
+###### Note:This is a Cumulative Assignment and Continuation of [Library Day1](https://github.com/ayeshafatima977/Library-Day1.git) [Library Day2](https://github.com/ayeshafatima977/Library-Day-2.git)
 
-Please visit above link or visit Trello Board for full requirement of the project.
+Please visit above links or visit Trello Board for full requirement of the project.
 
 ## Trello Link:
 
@@ -106,10 +106,8 @@ Please visit above link or visit Trello Board for full requirement of the projec
 11. [DateTime](https://www.w3resource.com/csharp-exercises/datetime/csharp-datetime-exercise-17.php)
 12. [Loading Related Data](https://docs.microsoft.com/en-us/ef/core/querying/related-data/)
 13. [DateTime Compare](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/lambda-expressions) 14.[Lambda Expressions](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/lambda-expressions)
-14. HomeWork Help Assistance :Aaron.C for Debugging Bugs and Helping Fixing Error for Object Reference on Extend Book and
-15. Peer Support from Birm and Oleg as they had similar earlier issues as I had.And Aaron.B for checking my Extension logic Functioning.
-16. [BootStrap Typography](https://getbootstrap.com/docs/4.0/content/typography/#description-list-alignment)
-17. [Bootstrap Form fields](https://getbootstrap.com/docs/4.0/components/list-group/)
-18. [Form](https://www.codeply.com/go/bp/)
-19. [BootStrap:Tables](https://www.w3schools.com/bootstrap/bootstrap_tables.asp)
-20. [Format Syntax on GitHub](https://docs.github.com/en/free-pro-team@latest/github/writing-on-github/basic-writing-and-formatting-syntax#lists)
+14. [BootStrap Typography](https://getbootstrap.com/docs/4.0/content/typography/#description-list-alignment)
+15. [Bootstrap Form fields](https://getbootstrap.com/docs/4.0/components/list-group/)
+16. [Form](https://www.codeply.com/go/bp/)
+17. [BootStrap:Tables](https://www.w3schools.com/bootstrap/bootstrap_tables.asp)
+18. [Format Syntax on GitHub](https://docs.github.com/en/free-pro-team@latest/github/writing-on-github/basic-writing-and-formatting-syntax#lists)
