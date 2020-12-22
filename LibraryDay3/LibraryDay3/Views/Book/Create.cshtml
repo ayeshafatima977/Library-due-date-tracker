@@ -1,6 +1,7 @@
-﻿@{
-    ViewData["Title"]="Create";
-    System.Diagnostics.Debug.WriteLine("VIEW - Rendering CREATE View\n-------------------------");
+﻿@using System.Diagnostics
+@{
+    ViewData["Title"] = "Create";
+    Debug.WriteLine("VIEW - Rendering CREATE View\n-------------------------");
 }
 <div class="p-3 mb-2 bg-info text-white">
     <h1 class="h1">Create a Book</h1>
@@ -9,16 +10,16 @@
 <section>
     @{
         //Display itemized errors on all appropriate “Book” view pages.
-        if ( ViewBag.Sucess!=null )
+        if (ViewBag.Sucess != null)
         {
             <p class="btn btn-success">Congratuations,@(ViewBag.Sucess)</p>
         }
 
-        else if ( ViewBag.Exception!=null )
+        else if (ViewBag.Exception != null)
         {
             <p class="alert-danger">Following Errors Occured : Please Correct and resubmit</p>
             <ul class="alert-danger">
-                @foreach ( Exception e in ViewBag.Exception.newExceptions )
+                @foreach (Exception e in ViewBag.Exception.newExceptions)
                 {
                     <li>@(e.Message)</li>
                 }
@@ -29,19 +30,19 @@
 </section>
 
 <section>
-    <form action="/Book/Create" method="get" >
+    <form action="/Book/Create" method="get">
 
         <div class="form-group">
             <label for="title" class="control-label col-md-3">Title</label>
-            <input type="text" id="title" name="title" value="" />
+            <input type="text" id="title" name="title" value=""/>
         </div>
         <div class="form-group">
             <label for="author_id" class="control-label col-md-3">Author</label>
             <select id="authorID" name="authorID" class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
 
-                @foreach ( Author author in ViewBag.Authors )
+                @foreach (Author author in ViewBag.Authors)
                 {
-                    @if ( author.ID.ToString()==ViewBag.AuthorID )
+                    @if (author.ID.ToString() == ViewBag.AuthorID)
                     {
                         <option value="@(author.ID)" selected>@(author.Name)</option>
                     }
@@ -49,16 +50,15 @@
                     {
                         <option value="@(author.ID)">@(author.Name)</option>
                     }
-
                 }
             </select>
         </div>
         <div class="form-group">
             <label for="publicationDate" class="control-label col-md-3">Publication Date</label>
-            <input type="date" id="publicationDate" name="publicationDate" value="@(ViewBag.PublicationDate)" />
+            <input type="date" id="publicationDate" name="publicationDate" value="@(ViewBag.PublicationDate)"/>
         </div>
 
-        <button type="submit" class="btn btn-primary" >Add Book</button>
+        <button type="submit" class="btn btn-primary">Add Book</button>
     </form>
 
 </section>

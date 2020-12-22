@@ -64,11 +64,19 @@ PM> dotnet ef update database
 
 The result of successful database migration and update is shown below in [PHPMyAdmin](https://www.phpmyadmin.net/) `localhost` with the database name **mvc_library**.
 
-![Database](/OutputImages/SeedData Sucessfull.PNG)
+![Database](/OutputImages/InitailMigration_databasegeneration.PNG)
 
-###### Note: For complete details
+## Screenshots of the views are shown below
 
-![Output images](/Library-Day3/OutputImages/)
+| Create View                                   | List View                                  |
+| --------------------------------------------- | ------------------------------------------ |
+| ![CreationView](/OutputImages/CreateBook.PNG) | ![ListView](/OutputImages/ListofBooks.PNG) |
+
+| Details View                                      | Author Index View                                 |
+| ------------------------------------------------- | ------------------------------------------------- |
+| ![DetailsView](/OutputImages/BookDetailsPage.PNG) | ![AuthorIndex](/OutputImages/AuthorsScaffold.PNG) |
+
+Note: **AuthorController** `Index()` view was created using scaffold, **MVC Controller with Views, using Entity Framework**.
 
 ## Usage/Approach
 

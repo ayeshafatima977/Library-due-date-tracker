@@ -1,11 +1,8 @@
-﻿ using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using LibraryDay3.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace LibraryDay3.Controllers
 {
@@ -27,17 +24,11 @@ namespace LibraryDay3.Controllers
         // GET: Authors/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
             var author = await _context.Authors
                 .FirstOrDefaultAsync(m => m.ID == id);
-            if (author == null)
-            {
-                return NotFound();
-            }
+            if (author == null) return NotFound();
 
             return View(author);
         }
@@ -61,6 +52,7 @@ namespace LibraryDay3.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
             return View(author);
         }
 
@@ -68,16 +60,10 @@ namespace LibraryDay3.Controllers
         // GET: Authors/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
             var author = await _context.Authors.FindAsync(id);
-            if (author == null)
-            {
-                return NotFound();
-            }
+            if (author == null) return NotFound();
             return View(author);
         }
 
@@ -88,10 +74,7 @@ namespace LibraryDay3.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ID,Name,BirthDate,DeathDate")] Author author)
         {
-            if (id != author.ID)
-            {
-                return NotFound();
-            }
+            if (id != author.ID) return NotFound();
 
             if (ModelState.IsValid)
             {
@@ -103,39 +86,31 @@ namespace LibraryDay3.Controllers
                 catch (DbUpdateConcurrencyException)
                 {
                     if (!AuthorExists(author.ID))
-                    {
                         return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    throw;
                 }
+
                 return RedirectToAction(nameof(Index));
             }
+
             return View(author);
         }
 
         // GET: Authors/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
             var author = await _context.Authors
                 .FirstOrDefaultAsync(m => m.ID == id);
-            if (author == null)
-            {
-                return NotFound();
-            }
+            if (author == null) return NotFound();
 
             return View(author);
         }
 
         // POST: Authors/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
+        [ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {

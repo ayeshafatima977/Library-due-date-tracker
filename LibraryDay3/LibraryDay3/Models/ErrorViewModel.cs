@@ -1,5 +1,3 @@
-using System;
-
 namespace LibraryDay3.Models
 {
     public class ErrorViewModel
